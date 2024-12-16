@@ -1,0 +1,49 @@
+entrypoints Programs;
+Label1. Programx ::= "int" "principal" "(" ")" "{" Declaracoes Instrucoes "retorne" Inteiro ";" "}" ";";
+
+rules Declaracoes ::= Declaracao Declaracoes ";";
+
+rules Declaracao ::= Tipo Identificador";" | StructDecl";" | PonteiraDecl";" | VetorDecl ";" ;
+
+rules Declaracao ::= Tipo Identificador "=" Inteiro ";" | Tipo Identificador "=" Real";" | Tipo Identificador "=" Char";" | Tipo Identificador "=" String";" | StructDecl";" | PonteiraDecl";" | VetorDecl";";            
+
+
+E. StructDecl ::= "struct" IdentifierLabel "{"FieldDecl"}" ";"; 
+F. FieldDecl  ::= TypeType1 IdentifierLabel ";" ;
+P. PonteiraDecl ::= TypeType2 "*" IdentifierLabel ";" ;
+V. VetorDecl ::= TypeType3 IdentifierLabel "[" Inteiro "]" ";" ;
+
+rules Instrucoes ::= Instrucao Instrucoes ";" ;
+rules Instrucao ::= Atribuicao ";"| Modularizacao ";" ;
+
+A. Atribuicao ::= Identificador "=" Expressao ";" ;
+Co. Comentario ::= "//" String ";" ;
+Label2. DeclaracaoSe ::= "SE" "(" Expressao ")" "{" Instrucoes "}" "senao" "{" Instrucoes "}" ";" ;
+Label3. LoopPara ::= "para" "(" Atribuicao ";" Condicao ";" Atribuicao ")" "{" Instrucoes "}" ";" ;
+Label4. Imprima ::= "imprima" "(" Expressao ")" ";" ;
+Label5. Entrada ::= "entrada" "(" Identificador ")" ";" ;
+Label6. Modularizacao ::= "modularizacao" IdentifierLabel "(" ")" "{" Instrucoes "}" ";" ;
+
+rules Expressao ::= Termo";" | Expressao "+" Termo";"  | Expressao "-" Termo";" | Expressao "*" Termo";" | Expressao "/" Termo ";" ;
+
+rules Termo ::= Identificador";" | Identificador "[" Inteiro "]" ";"; 
+
+rules Termo ::= Inteiro | Texto | Identificador "[" Inteiro "]" ";" ;
+
+rules Condicao ::= Expressao ">" Expressao";" | Expressao ">=" Expressao";" | Expressao "<" Expressao";"| Expressao "<=" Expressao";"
+                 | Expressao "==" Expressao";"| "nao" Condicao";" | "(" Condicao ")"";" | Condicao "e" Condicao ";"| Condicao "ou" Condicao ";" ;
+
+rules Tipo ::= "int" | "texto" | "struct" IdentifierLabel";" ;
+Id. Identificador ::= Letra "(Letra | Digito )" ";" ;
+In. Inteiro ::= Digito";" ;
+Ir. Real ::= Digito "." Digito";" ;
+Ch. Chax ::= Letra";" ;
+It. Texto ::= """ Caractere* """";";
+
+Ie. IdentifierLabel ::= Identificador;
+rules TypeType1 ::= "int"";" | "texto"";" | "struct" IdentifierLabel";";
+rules TypeType2 ::= "int"";" | "texto"";" | "struct" IdentifierLabel";";
+rules TypeType3 ::= "int"";" | "texto"";" | "struct" IdentifierLabel";";
+L. Letra ::= "[a-zA-Z]" ";";
+D. Digito ::= "[0-9]"";";
+Ca. Caractere ::= "[a-zA-Z0-9 ]"";";
